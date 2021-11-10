@@ -43,13 +43,7 @@ def use_browser(org_func: Any):
             )
 
             log("reloading world.")
-            url = browser.driver.current_url
-            world = url.split("//")
-            world = world[1]
-            world = world.split(".")
-            world = world[0]
-
-            browser.get("https://qtatar.com/dorf1")
+           
         finally:
             browser.done()
 

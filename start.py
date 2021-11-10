@@ -9,6 +9,7 @@ proxy = ""  # optional
 # increase the number if your internet connecion is slow
 settings.browser_speed = 0.5
 
+
 kingbot = king_bot(
     email=email,
     password=password,
@@ -22,7 +23,7 @@ kingbot = king_bot(
 # kingbot.start_adventures(1000)
 # kingbot.upgrade_units_smithy(village=0, units=[2, 5])
 
-kingbot.start_building(village=1, file_name="village_2.json" , interval=30)
+kingbot.start_building(village= 1, file_name="village_2.json" , interval=30)
 
 # kingbot.dodge_attack(
 #     village=0,

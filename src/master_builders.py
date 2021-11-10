@@ -90,33 +90,25 @@ def master_builder(
         browser.sleep(3)
         buildMap = browser.find('//div[@id="village_map"]')
         buildPlace = buildMap.find_elements(
-            By.XPATH, ".//img[contains(@class,'building')]")
-        log(format(len(buildPlace)))
-        for n in buildPlace:
+            By.XPATH, ".//img[contains(@class,'building') and contains(@class,'iso')]")
+        
+        
+        browser.click(buildPlace[0], 1)
+        buildPage = browser.find('//div[@class="gid0"]')
+        tables = buildPage.find_elements(
+            By.XPATH, './/table[@class="new_building"]')
+        for t in tables:
 
-            if "iso" in n.get_attribute("class"):
-                browser.click(n, 1)
-                log(n.get_attribute("class"))
-                browser.sleep(3)
-                buildPage = browser.find('//div[@class="gid0"]')
-                tables = buildPage.find_elements(
-                    By.XPATH, '//table[@class="new_building"]')
-                for t in tables:
-
-                    btnBuild = t.find_elements(By.XPATH, './/a')
-                    for a in btnBuild:
-                        if "build" in a.get_attribute("class"):
-                            log("5")
-
-                            if "b={}".format(building_id) in a.get_attribute("href"):
+                        btnBuild = t.find_element(By.XPATH, './/a[contains(@class,"build")]')
+                        if "b={}".format(building_id) in btnBuild.get_attribute("href"):
                                 log("6")
-                                browser.click(a)
+                                browser.click(btnBuild)
                                 new_queues = queues[1:]
                                 return new_queues
                                 break
 
-                new_queues = queues[1:]
-                return new_queues
+        new_queues = queues[1:]
+        return new_queues
     elif (
             "Upgrade" in queues[0]["queueType"] and "Village" in queues[0]["queueLocation"]):
         log("cond 2 ")
@@ -133,26 +125,34 @@ def master_builder(
             log("buildingId not found, remove it from queues.")
             new_queues = queues[1:]
             return new_queues
-
+        browser.sleep(2)
         buildMap = browser.find('//div[@id="village_map"]')
         buildPlace = buildMap.find_elements(
             By.XPATH, ".//img[contains(@class,'building')]")
         for item in buildPlace:
-            n = item
-            if "g{}".format(building_id) in item.get_attribute("class"):
-                if "20" not in item.get_attribute("alt"):
-                    browser.click(n)
-                    box = browser.find('//div[@id="build"]')
+             if "g{}".format(building_id) in item.get_attribute("class"):
+
+                 if "20" not in item.get_attribute("alt"):
+                    browser.click(item, 3)
+                    box = browser.find('//p[@id="contract"]')
+                    if  box.find_elements(
+                        By.XPATH, ".//span[contains(@class,'none')]") :
+                         new_queues = queues[1:]
+                         return new_queues
+                         break
 
                     btn = box.find_elements(
-                        By.XPATH, ".//a")
-                    for a in btn:
-                        if "build" in a.get_attribute("class"):
-                            
-                            new_queues = queues[1:]
-                            log("building ressource")
-                            return new_queues
+                        By.XPATH, ".//a[contains(@class,'build')]")
+                     
+                    browser.click(btn[0], 1)
 
+                    new_queues = queues[1:]
+                    log("building ressource")
+                    return new_queues
+
+        new_queues = queues[1:]
+        log("building ressource")
+        return new_queues     
     elif "Resources" in queues[0]["queueLocation"]:
         log("cond 3")
 
