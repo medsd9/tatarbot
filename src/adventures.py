@@ -1,3 +1,4 @@
+from selenium.webdriver.common.by import By
 from .custom_driver import client, use_browser
 from threading import Thread
 import time
@@ -24,10 +25,10 @@ def start_adventure(browser: client, interval: int) -> bool:
     # log("adventure thread waking up")
 
     heroLinks = browser.find("//div[@class='heroLinks']")
-    a = heroLinks.find_element_by_xpath(".//a[contains(@class, 'adventureLink')]")
+    a = heroLinks.find_element(By.XPATH,".//a[contains(@class, 'adventureLink')]")
     browser.click(a, 2)
     el = browser.find("//div[@class='modalContent']")
-    el = el.find_element_by_xpath(".//button")
+    el = el.find_element(By.XPATH,".//button")
 
     classes = el.get_attribute("class").split(" ")
     available = True
@@ -49,7 +50,7 @@ def start_adventure(browser: client, interval: int) -> bool:
 @use_browser
 def check_health(browser: client, health: int) -> bool:
     hero_stats = browser.find("//div[@class='heroStats']")
-    hero_stats = hero_stats.find_element_by_xpath(".//div[contains(@class, 'health')]")
+    hero_stats = hero_stats.find_element(By.XPATH,".//div[contains(@class, 'health')]")
     hero_health = int(hero_stats.get_attribute("perc"))
 
     return hero_health > health
@@ -58,13 +59,13 @@ def check_health(browser: client, health: int) -> bool:
 @use_browser
 def check_adventure_time(browser: client) -> int:
     movements = browser.find("//div[@id='troopMovements']")
-    ul = movements.find_element_by_xpath(".//ul")
-    lis = ul.find_elements_by_xpath(".//li")
+    ul = movements.find_element(By.XPATH,".//ul")
+    lis = ul.find_elements(By.XPATH,".//li")
 
     for li in lis:
         classes = li.get_attribute("class")
         if "outgoing_adventure" in classes:
-            cd = li.find_element_by_xpath(".//div[@class='countdown']")
+            cd = li.find_element(By.XPATH,".//div[@class='countdown']")
             adventure_time = cd.get_attribute("innerHTML")
             timelist = adventure_time.split(":")
             countdown = (

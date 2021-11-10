@@ -1,3 +1,4 @@
+from selenium.webdriver.common.by import By
 from .custom_driver import client
 from .utils import log
 from enum import Enum
@@ -5,14 +6,14 @@ from enum import Enum
 
 def close_modal(browser: client) -> None:
     el = browser.find("//div[@class='modalContent']")
-    el = el.find_element_by_xpath(".//a[@class='closeWindow clickable']")
+    el = el.find_element(By.XPATH,".//a[@class='closeWindow clickable']")
     browser.click(el)
 
 
 def close_welcome_screen(browser: client) -> None:
     wc = browser.find("//div[contains(@class, 'welcomeScreen')]")
     log("closing welcome-screen")
-    el = wc.find_element_by_xpath(".//a[@class='closeWindow clickable']")
+    el = wc.find_element(By.XPATH,".//a[@class='closeWindow clickable']")
     browser.click(el)
 
 
@@ -21,7 +22,7 @@ def check_resources(browser: client) -> dict:
     resources = {}
     for res in resources_list:
         find_resources = browser.find("//div[@class='stockContainer {0}']".format(res))
-        find_resources = find_resources.find_element_by_xpath(
+        find_resources = find_resources.find_element(By.XPATH,
             ".//div[contains(@class, 'progressbar')]"
         )
         value = int(find_resources.get_attribute("value"))
@@ -38,10 +39,10 @@ class shortcut(Enum):
 
 def open_shortcut(browser: client, sc: shortcut) -> None:
     shortcut_link = browser.find("//div[@id='quickLinks']")
-    shortcut_link = shortcut_link.find_element_by_xpath(
+    shortcut_link = shortcut_link.find_element(By.XPATH,
         ".//div[contains(@class, 'slotWrapper')]"
     )
-    link = shortcut_link.find_elements_by_xpath(
+    link = shortcut_link.find_elements(By.XPATH,
         ".//div[contains(@class, 'slotContainer')]"
     )
     browser.click(link[sc.value], 1)
@@ -69,10 +70,10 @@ def open_village_overview(browser: client, tab: overview) -> None:
 def old_shortcut(browser: client, shortcut: str) -> None:
     shortcut_dict = {"marketplace": 0, "barrack": 1, "stable": 2, "workshop": 3}
     shortcut_link = browser.find("//div[@id='quickLinks']")
-    shortcut_link = shortcut_link.find_element_by_xpath(
+    shortcut_link = shortcut_link.find_element(By.XPATH,
         ".//div[contains(@class, 'slotWrapper')]"
     )
-    link = shortcut_link.find_elements_by_xpath(
+    link = shortcut_link.find_elements(By.XPATH,
         ".//div[contains(@class, 'slotContainer')]"
     )
     browser.click(link[shortcut_dict[shortcut.lower()]], 1)

@@ -4,7 +4,7 @@ from selenium.webdriver.remote import webelement
 
 
 def find_slot(browser: client, id: int) -> webelement:
-    el_list = browser.driver.find_elements_by_xpath(
+    el_list = browser.driver.find_elements(By.XPATH,
         "//div[contains(@class, 'buildingStatus location{}')]".format(id)
     )
 

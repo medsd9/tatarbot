@@ -1,3 +1,4 @@
+from selenium.webdriver.common.by import By
 from .custom_driver import client, use_browser
 from .utils import log
 from .util_game import close_modal
@@ -44,7 +45,7 @@ def send_troops(browser: client, village: int, robber, units: dict) -> None:
     browser.click(raid_button, 2)
 
     input = browser.find("//tbody[contains(@class, 'inputTroops')]/tr")
-    input = input.find_elements_by_xpath(".//td")
+    input = input.find_elements(By.XPATH,".//td")
 
     units_sent = False
     units_total = 0
@@ -52,7 +53,7 @@ def send_troops(browser: client, village: int, robber, units: dict) -> None:
     if -1 in units:
         # send all units, max count
         for inp in input:
-            inp = inp.find_element_by_xpath(".//input")
+            inp = inp.find_element(By.XPATH,".//input")
             dis = inp.get_attribute("disabled")
             if not dis:
                 inp.click()
@@ -62,7 +63,7 @@ def send_troops(browser: client, village: int, robber, units: dict) -> None:
     else:
         # send value amount of units with index key
         for key, value in units.items():
-            inp = input[int(key)].find_element_by_xpath(".//input")
+            inp = input[int(key)].find_element(By.XPATH,".//input")
             # check if the field is disabled
             dis = inp.get_attribute("disabled")
 
@@ -105,8 +106,8 @@ def send_troops(browser: client, village: int, robber, units: dict) -> None:
 @use_browser
 def check_troops(browser: client) -> bool:
     movements = browser.find("//div[@id='troopMovements']")
-    ul = movements.find_element_by_xpath(".//ul")
-    lis = ul.find_elements_by_xpath(".//li")
+    ul = movements.find_element(By.XPATH,".//ul")
+    lis = ul.find_elements(By.XPATH,".//li")
 
     for li in lis:
         classes = li.get_attribute("class")
@@ -125,11 +126,11 @@ def check_robber(browser: client, village: int):
     map_button = browser.find("//a[contains(@class, 'navi_map bubbleButton')]")
     browser.click(map_button, 1)
     overlay_markers = browser.find("//div[@id='overlayMarkers']")
-    divs = overlay_markers.find_elements_by_xpath(".//div")
+    divs = overlay_markers.find_elements(By.XPATH,".//div")
     for listed in divs:
         attribute = listed.get_attribute("class")
         if "robber" in attribute:
-            span = listed.find_element_by_xpath(".//span")
+            span = listed.find_element(By.XPATH,".//span")
             span_attribute = span.get_attribute("class")
             if "jsVillageType5" in span_attribute:
                 browser.hover(span)

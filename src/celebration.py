@@ -1,4 +1,6 @@
 import time
+
+from selenium.webdriver.common.by import By
 from .utils import log, parse_time_to_seconds
 from .custom_driver import client, use_browser
 from .util_game import close_modal, open_village_overview, overview
@@ -47,11 +49,11 @@ def get_available_villages(browser: client, villages: list) -> list:
     open_village_overview(browser, overview.culture_points)
 
     tab_content = browser.find("//div[contains(@class, 'tabCulturePoints')]")
-    table = tab_content.find_element_by_xpath(
+    table = tab_content.find_element(By.XPATH,
         ".//table[contains(@class, 'villagesTable')]/tbody"
     )
 
-    trs = table.find_elements_by_xpath(".//tr")
+    trs = table.find_elements(By.XPATH,".//tr")
 
     available_villages = []
     for village in villages:
@@ -60,8 +62,8 @@ def get_available_villages(browser: client, villages: list) -> list:
             continue
 
         # village is available
-        span = trs[village].find_elements_by_xpath(".//td")[2]
-        span = span.find_element_by_xpath(".//span")
+        span = trs[village].find_elements(By.XPATH,".//td")[2]
+        span = span.find_element(By.XPATH,".//span")
 
         ngif = span.get_attribute("ng-if")
 
@@ -75,19 +77,19 @@ def start_celebration(browser: client, village: int, celebration_type: int) -> N
     open_village_overview(browser, overview.culture_points)
 
     tab_content = browser.find("//div[contains(@class, 'tabCulturePoints')]")
-    table = tab_content.find_element_by_xpath(
+    table = tab_content.find_element(By.XPATH,
         ".//table[contains(@class, 'villagesTable')]/tbody"
     )
 
-    trs = table.find_elements_by_xpath(".//tr")
+    trs = table.find_elements(By.XPATH,".//tr")
 
     if len(trs) <= village:
         log(f"couldn't access village: {village}")
         return
 
     # village is available
-    span = trs[village].find_elements_by_xpath(".//td")[2]
-    span = span.find_element_by_xpath(".//span")
+    span = trs[village].find_elements(By.XPATH,".//td")[2]
+    span = span.find_element(By.XPATH,".//span")
 
     ngif = span.get_attribute("ng-if")
 
@@ -96,7 +98,7 @@ def start_celebration(browser: client, village: int, celebration_type: int) -> N
         return
 
     # start celebrating
-    atag = span.find_element_by_xpath(".//a")
+    atag = span.find_element(By.XPATH,".//a")
     browser.click(atag, 1)
 
     if celebration_type == 1:
@@ -119,11 +121,11 @@ def get_celebration_times(browser: client, villages: list) -> list:
     open_village_overview(browser, overview.culture_points)
 
     tab_content = browser.find("//div[contains(@class, 'tabCulturePoints')]")
-    table = tab_content.find_element_by_xpath(
+    table = tab_content.find_element(By.XPATH,
         ".//table[contains(@class, 'villagesTable')]/tbody"
     )
 
-    trs = table.find_elements_by_xpath(".//tr")
+    trs = table.find_elements(By.XPATH,".//tr")
 
     sleep_time_list = []
     for village in villages:
@@ -132,13 +134,13 @@ def get_celebration_times(browser: client, villages: list) -> list:
             continue
 
         # village is available
-        span = trs[village].find_elements_by_xpath(".//td")[2]
-        span = span.find_element_by_xpath(".//span")
+        span = trs[village].find_elements(By.XPATH,".//td")[2]
+        span = span.find_element(By.XPATH,".//span")
 
         ngif = span.get_attribute("ng-if")
 
         if "> 0" in ngif:
-            span = span.find_element_by_xpath(".//span")
+            span = span.find_element(By.XPATH,".//span")
             time = span.get_attribute("innerHTML")
             sleep_time_list.append(time)
 

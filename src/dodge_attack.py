@@ -1,3 +1,4 @@
+from selenium.webdriver.common.by import By
 from .custom_driver import client, use_browser
 import time
 from random import randint
@@ -81,13 +82,13 @@ def check_for_attack(browser: client, village: int) -> str:
     open_village(browser, village)
 
     movements = browser.find("//div[@id='troopMovements']")
-    ul = movements.find_element_by_xpath(".//ul")
-    lis = ul.find_elements_by_xpath(".//li")
+    ul = movements.find_element(By.XPATH,".//ul")
+    lis = ul.find_elements(By.XPATH,".//li")
 
     for li in lis:
         classes = li.get_attribute("class")
         if "incoming_attacks" in classes:
-            cd = li.find_element_by_xpath(".//div[@class='countdown']")
+            cd = li.find_element(By.XPATH,".//div[@class='countdown']")
             countdown = cd.get_attribute("innerHTML")
 
             log("incoming attack in {} !".format(countdown))
@@ -101,7 +102,7 @@ def check_for_attack(browser: client, village: int) -> str:
 def save_resources(browser: client, threshold: list) -> None:
     open_shortcut(browser, shortcut.barrack)
     el = browser.find("//div[@class='modalContent']")
-    max_button = el.find_element_by_xpath(
+    max_button = el.find_element(By.XPATH,
         ".//div[@class='iconButton maxButton clickable']"
     )
     browser.click(max_button, 1)
@@ -116,22 +117,22 @@ def save_resources(browser: client, threshold: list) -> None:
     open_shortcut(browser, shortcut.marketplace)
     browser.sleep(1)
     el = browser.find("//div[@class='modalContent']")
-    sell_tab = el.find_element_by_xpath(
+    sell_tab = el.find_element(By.XPATH,
         ".//a[contains(@class, 'naviTabSell clickable')]"
     )
     browser.click(sell_tab, 1)
-    merchant = el.find_element_by_xpath(".//div[@class='marketplaceHeaderGroup']")
-    merchant = merchant.find_element_by_xpath(".//div[@class='circle']/span")
+    merchant = el.find_element(By.XPATH,".//div[@class='marketplaceHeaderGroup']")
+    merchant = merchant.find_element(By.XPATH,".//div[@class='circle']/span")
     merchant = int(merchant.get_attribute("innerHTML"))
     browser.sleep(1)
     if merchant > 0:
         for res_name in resource.keys():
             if resource[res_name] >= threshold[foo]:
                 offering = browser.find("//div[@class='offerBox']")
-                offering = offering.find_element_by_xpath(
+                offering = offering.find_element(By.XPATH,
                     ".//div[@class='resourceFilter filterBar']"
                 )
-                offering_type = offering.find_elements_by_xpath(
+                offering_type = offering.find_elements(By.XPATH,
                     ".//a[contains(@class, 'filter iconButton')]"
                 )
                 browser.click(offering_type[foo], 1)
@@ -142,10 +143,10 @@ def save_resources(browser: client, threshold: list) -> None:
                 input_offering.send_keys("1000")
                 browser.sleep(1)
                 searching = browser.find("//div[@class='searchBox']")
-                searching = searching.find_element_by_xpath(
+                searching = searching.find_element(By.XPATH,
                     ".//div[@class='resourceFilter filterBar']"
                 )
-                searching_type = searching.find_elements_by_xpath(
+                searching_type = searching.find_elements(By.XPATH,
                     ".//a[contains(@class, 'filter iconButton')]"
                 )
                 browser.click(searching_type[(foo + 1) % 2], 1)
@@ -224,21 +225,21 @@ def save_resources_gold(browser: client, units_train: list, content: dict) -> No
     browser.click(npc_tab, 1)
 
     market_content = browser.find('//div[contains(@class, "marketContent npcTrader")]')
-    trs = market_content.find_elements_by_xpath('.//tbody[@class="sliderTable"]/tr')
+    trs = market_content.find_elements(By.XPATH,'.//tbody[@class="sliderTable"]/tr')
     browser.sleep(1)
 
     for tr in trs[:-2]:
-        input = tr.find_element_by_xpath(".//input")
+        input = tr.find_element(By.XPATH,".//input")
         browser.sleep(0.5)
         input.clear()
         browser.sleep(1.5)
         input.send_keys(next(_resource))
         browser.sleep(1.5)
-        lock = tr.find_element_by_xpath('.//div[@class="lockButtonBackground"]')
+        lock = tr.find_element(By.XPATH,'.//div[@class="lockButtonBackground"]')
         browser.sleep(1.5)
         browser.click(lock, 1)
         browser.sleep(1.5)
-    convert_button = market_content.find_element_by_xpath(
+    convert_button = market_content.find_element(By.XPATH,
         './/div[@class="merchantBtn"]/button'
     )
     browser.click(convert_button, 1)
@@ -260,7 +261,7 @@ def save_resources_gold(browser: client, units_train: list, content: dict) -> No
             browser.click(image_troop, 1)
             # input amount based training_queue[unit_train][unit_id]
             input_troop = browser.find('//div[@class="inputContainer"]')
-            input_troop = input_troop.find_element_by_xpath("./input").send_keys(
+            input_troop = input_troop.find_element(By.XPATH,"./input").send_keys(
                 training_queue[unit_train][unit_id]
             )
             browser.sleep(1.5)

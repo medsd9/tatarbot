@@ -1,3 +1,4 @@
+from selenium.webdriver.common.by import By
 from .custom_driver import client, use_browser
 from .utils import log
 from .util_game import close_modal
@@ -52,7 +53,7 @@ def send_troops(browser: client, village: int, robber, units: dict) -> None:
     browser.click(raid_button, 2)
 
     input = browser.find("//tbody[contains(@class, 'inputTroops')]/tr")
-    input = input.find_elements_by_xpath(".//td")
+    input = input.find_elements(By.XPATH,".//td")
 
     units_sent = False
     units_total = 0
@@ -60,7 +61,7 @@ def send_troops(browser: client, village: int, robber, units: dict) -> None:
     if -1 in units:
         # send all units, max count
         for inp in input:
-            inp = inp.find_element_by_xpath(".//input")
+            inp = inp.find_element(By.XPATH,".//input")
             dis = inp.get_attribute("disabled")
             if not dis:
                 inp.click()
@@ -70,7 +71,7 @@ def send_troops(browser: client, village: int, robber, units: dict) -> None:
     else:
         # send value amount of units with index key
         for key, value in units.items():
-            inp = input[int(key)].find_element_by_xpath(".//input")
+            inp = input[int(key)].find_element(By.XPATH,".//input")
             # check if the field is disabled
             dis = inp.get_attribute("disabled")
 
@@ -116,12 +117,12 @@ def check_robbers(browser: client, village: int):
     map_button = browser.find("//a[contains(@class, 'navi_map bubbleButton')]")
     browser.click(map_button, 1)
     overlay_markers = browser.find("//div[@id='overlayMarkers']")
-    divs = overlay_markers.find_elements_by_xpath(".//div")
+    divs = overlay_markers.find_elements(By.XPATH,".//div")
     robbers = []
     for listed in divs:
         attribute = listed.get_attribute("class")
         if "robber" in attribute:
-            span = listed.find_element_by_xpath(".//span")
+            span = listed.find_element(By.XPATH,".//span")
             span_attribute = span.get_attribute("class")
             if "jsVillageType8" in span_attribute:
                 browser.hover(span)

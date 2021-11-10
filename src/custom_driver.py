@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 from selenium.webdriver.remote import webelement
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
@@ -48,7 +49,7 @@ def use_browser(org_func: Any):
             world = world.split(".")
             world = world[0]
 
-            browser.get("https://{}.kingdoms.com".format(world))
+            browser.get("https://qtatar.com/dorf1")
         finally:
             browser.done()
 
@@ -142,13 +143,13 @@ class client:
         # todo wait x seconds until presencd of element
         wait = wait * settings.browser_speed
         self.sleep(wait)
-        return self.driver.find_element_by_xpath(xpath)
+        return self.driver.find_element(By.XPATH, xpath)
 
     def finds(self, xpath: str, wait: float = 0) -> webelement:
         # todo wait x seconds until presencd of element
         wait = wait * settings.browser_speed
         self.sleep(wait)
-        return self.driver.find_elements_by_xpath(xpath)
+        return self.driver.find_elements(By.XPATH, xpath)
 
     def sleep(self, seconds: float) -> None:
         seconds = seconds * settings.browser_speed
@@ -170,7 +171,8 @@ class client:
         self.sleep(wait)
 
     def click_v2(self, element: webelement, wait: float = 0.5) -> None:
-        ActionChains(self.driver).move_to_element(element).click(element).perform()
+        ActionChains(self.driver).move_to_element(
+            element).click(element).perform()
 
         wait = wait * settings.browser_speed
         self.sleep(wait)

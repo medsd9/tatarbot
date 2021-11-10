@@ -1,3 +1,4 @@
+from selenium.webdriver.common.by import By
 from .custom_driver import client
 from .slot import find_slot
 from .utils import log
@@ -8,7 +9,7 @@ def load_slot_data(browser: client, id: int) -> dict:
     el = find_slot(browser, id)
     templvl = el.find_element_by_class_name("buildingLevel")
     lvl = templvl.get_attribute("innerHTML")
-    temp_upgrade = el.find_element_by_xpath(
+    temp_upgrade = el.find_element(By.XPATH,
         ".//div[contains(@class, 'colorLayer')]"
     ).get_attribute("class")
 
@@ -25,12 +26,12 @@ def init_villages(browser: client) -> list:
     browser.click(btn, 1)
 
     table = browser.find("//table[contains(@class, 'villagesTable')]/tbody")
-    villages = table.find_elements_by_xpath(".//tr")
+    villages = table.find_elements(By.XPATH,".//tr")
 
     for vil in villages:
-        tds = vil.find_elements_by_xpath(".//td")
+        tds = vil.find_elements(By.XPATH,".//td")
 
-        name = tds[0].find_element_by_xpath(".//a").get_attribute("innerHTML")
+        name = tds[0].find_element(By.XPATH,".//a").get_attribute("innerHTML")
 
         # villages.append(
         #   village(browser, name, villages.index(vil)))
@@ -41,7 +42,7 @@ def init_villages(browser: client) -> list:
 
 
 def checkBuildingSlot(browser: client):
-    slots = browser.driver.find_elements_by_xpath(
+    slots = browser.driver.find_elements(By.XPATH,
         "//div[@class='masterBuilderContainer']/div[contains(@class, 'buildingQueueSlot')]"
     )
 

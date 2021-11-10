@@ -1,0 +1,9 @@
+{
+  "queues": [
+    {
+      "queueLocation": "Village",
+      "queueType": "Upgrade",
+      "queueBuilding": "Granary"
+    }
+  ]
+}

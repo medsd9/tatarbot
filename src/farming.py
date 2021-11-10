@@ -1,3 +1,4 @@
+from selenium.webdriver.common.by import By
 from .custom_driver import client, use_browser
 from .settings import settings
 import time
@@ -34,10 +35,10 @@ def start_farming(browser: client, village: int, farmlists: list) -> None:
 
     table = browser.find("//div[@class='farmList']")
     table = browser.find(".//table[contains(@class, 'farmListsOverviewTable')]")
-    lists = table.find_elements_by_xpath(".//tbody")
+    lists = table.find_elements(By.XPATH,".//tbody")
 
     for i in farmlists:
-        cb = lists[i].find_element_by_xpath(".//input[@type='checkbox']")
+        cb = lists[i].find_element(By.XPATH,".//input[@type='checkbox']")
         # cb.send_keys(Keys.SPACE)
         browser.click(cb)
 
@@ -81,20 +82,20 @@ def sort_danger_farms(
 
     table = browser.find("//div[@class='farmList']")
     table = browser.find(".//table[contains(@class, 'farmListsOverviewTable')]")
-    lists = table.find_elements_by_xpath(".//tbody")
+    lists = table.find_elements(By.XPATH,".//tbody")
 
     for i in farmlists:
         # opens farmlist
-        cb = lists[i].find_element_by_xpath(".//td[contains(@class, 'clickable')]")
+        cb = lists[i].find_element(By.XPATH,".//td[contains(@class, 'clickable')]")
         browser.click(cb)
 
         tbody = browser.find("//div[@class='listDetail']")
-        tbody = tbody.find_element_by_xpath(".//tbody")
-        trs = tbody.find_elements_by_xpath(".//tr")
+        tbody = tbody.find_element(By.XPATH,".//tbody")
+        trs = tbody.find_elements(By.XPATH,".//tr")
         for tr in trs:
-            tds = tr.find_elements_by_xpath(".//td")
+            tds = tr.find_elements(By.XPATH,".//td")
             try:
-                icon = tds[6].find_element_by_xpath(".//i")
+                icon = tds[6].find_element(By.XPATH,".//i")
                 translate = icon.get_attribute("tooltip-translate")
                 if translate != "Notification_1":
                     movefarm = False
@@ -112,18 +113,18 @@ def sort_danger_farms(
                         browser.hover(tds[1])
 
                         if to_list == -1:
-                            add = tds[9].find_element_by_xpath(
+                            add = tds[9].find_element(By.XPATH,
                                 ".//div[contains(@clickable, 'deleteEntry')]"
                             )
                             browser.click(add, 1)
                         else:
-                            add = tds[9].find_element_by_xpath(
+                            add = tds[9].find_element(By.XPATH,
                                 ".//div[contains(@clickable, 'farmListAdd')]"
                             )
                             browser.click(add, 1)
 
                             inner = browser.find("//div[@class='farmListInner']")
-                            movelists = inner.find_element_by_xpath(
+                            movelists = inner.find_element(By.XPATH,
                                 ".//div[contains(@class, 'list')]"
                             )
 
@@ -141,7 +142,7 @@ def sort_danger_farms(
                             modal = browser.find(
                                 "//div[contains(@class, 'farmListAdd')]"
                             )
-                            closemodal = modal.find_element_by_xpath(
+                            closemodal = modal.find_element(By.XPATH,
                                 ".//a[contains(@class, 'closeWindow')]"
                             )
                             browser.click(closemodal, 2)
@@ -235,7 +236,7 @@ def send_farm(browser: client, village: int, x: int, y: int, units: dict) -> Non
     browser.click(btn, 2)
 
     input = browser.find("//div[@class='modalContent']")
-    input = input.find_element_by_xpath(".//input[contains(@class, 'targetInput')]")
+    input = input.find_element(By.XPATH,".//input[contains(@class, 'targetInput')]")
     input.send_keys("({}|{})".format(x, y))
     browser.sleep(1)
 
@@ -243,7 +244,7 @@ def send_farm(browser: client, village: int, x: int, y: int, units: dict) -> Non
     browser.click(btn)
 
     input = browser.find("//tbody[contains(@class, 'inputTroops')]/tr")
-    input = input.find_elements_by_xpath(".//td")
+    input = input.find_elements(By.XPATH,".//td")
 
     units_sent = False
 
@@ -251,7 +252,7 @@ def send_farm(browser: client, village: int, x: int, y: int, units: dict) -> Non
         # send all units, max count
         log("send all units max count...")
         for inp in input:
-            inp = inp.find_element_by_xpath(".//input")
+            inp = inp.find_element(By.XPATH,".//input")
             dis = inp.get_attribute("disabled")
             if not dis:
                 inp.click()
@@ -261,7 +262,7 @@ def send_farm(browser: client, village: int, x: int, y: int, units: dict) -> Non
     else:
         # send value amount of units with index key
         for key, value in units.items():
-            inp = input[int(key)].find_element_by_xpath(".//input")
+            inp = input[int(key)].find_element(By.XPATH,".//input")
             # check if the field is disabled
             dis = inp.get_attribute("disabled")
 

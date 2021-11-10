@@ -6,32 +6,22 @@ from .custom_driver import client, use_browser
 def login(browser: client, gameworld: str, email: str, password: str) -> None:
     world = gameworld
 
-    browser.get("https://kingdoms.com/com")
+    browser.get("https://qtatar.com/join?s=1")
 
-    loginButton = browser.find("//span[text()='Login']", 1)
+     
+    
+    browser.find("//input[@name='name']").send_keys(email)
+    pw = browser.find("//input[@name='password']").send_keys(password)
+    browser.find("//button[@name='submit']").click()
+    #  check_notification(browser)
 
-    browser.click(loginButton, 2)
-
-    el = browser.find("//iframe[@class='mellon-iframe']", 2)
-
-    browser.driver.switch_to.frame(el)
-    el = browser.find("//iframe", 2)
-    browser.driver.switch_to.frame(el)
-
-    browser.find("//input[@name='email']").send_keys(email)
-    pw = browser.find("//input[@name='password']")
-    pw.send_keys(password)
-    pw.submit()
-    browser.sleep(3)
-    check_notification(browser)
-
-    # login to gameworld
-    browser.find(
-        "//span[contains(text(), '{}')]/following::button[@type='button']".format(world)
-    ).click()
+    # # login to gameworld
+    # browser.find(
+    #     "//span[contains(text(), '{}')]/following::button[@type='button']".format(world)
+    # ).click()
 
     log("login successful")
-    browser.sleep(8)
+    # browser.sleep(3)
 
 
 def check_notification(browser: client) -> None:

@@ -1,3 +1,5 @@
+from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.by import By
 from .custom_driver import client, use_browser
 from .village import open_village, open_city, open_resources
 from .utils import log, parse_time_to_seconds
@@ -13,6 +15,7 @@ def master_builder_thread(
     browser: client, village: int, file_name: str, interval: int
 ) -> None:
     default_interval = interval
+    # browser.sleep(10)
     with open(settings.buildings_path, "r") as f:
         content = json.load(f)
     buildings = [x for x in content["buildings"]]
@@ -22,12 +25,13 @@ def master_builder_thread(
         with open(file_path, "r") as f:
             content = json.load(f)
         queues = [x for x in content["queues"]]
-        construct_slot, queue_slot = check_building_queue(browser, village)
-        if queues and (construct_slot or queue_slot):
-            while construct_slot or queue_slot:
+        construct_slot = check_building_queue(browser, village)
+        if queues and (construct_slot):
+            while construct_slot:
                 queues = master_builder(browser, village, queues, buildings)
-                construct_slot, queue_slot = check_building_queue(browser, village)
-                if not queue_slot:
+                construct_slot = check_building_queue(
+                    browser, village)
+                if not construct_slot:
                     break
                 if not queues:
                     break
@@ -35,21 +39,23 @@ def master_builder_thread(
                 f.write('{"queues":')
                 f.write(json.dumps(queues, indent=4))
                 f.write("}")
-            interval, can_finish_earlier = check_queue_times(
-                browser, village, default_interval
-            )
+            # interval, can_finish_earlier = check_queue_times(
+            #     browser, village, default_interval
+            # )
             time.sleep(interval)
-            if can_finish_earlier:
-                five_mins(browser, village)
+            # if can_finish_earlier:
+            #     five_mins(browser, village)
         else:
-            construct_slot, queue_slot = check_building_queue(browser, village)
+            log("no queue or slot !")
+            construct_slot = check_building_queue(browser, village)
             if not construct_slot:
-                interval, can_finish_earlier = check_queue_times(
-                    browser, village, default_interval
-                )
+                # interval, can_finish_earlier = check_queue_times(
+                #     browser, village, default_interval
+                # )
                 time.sleep(interval)
-                if can_finish_earlier:
-                    five_mins(browser, village)
+
+                # if can_finish_earlier:
+                #     five_mins(browser, village)
             elif not queues:
                 log("Queues is empty, please add queue to {}".format(file_name))
                 log(time.strftime("%H:%M"))
@@ -63,20 +69,58 @@ def master_builder(
     browser: client, village: int, queues: list, buildings: list
 ) -> list:
     open_village(browser, village)
-    tribe_id = browser.find('//*[@id="troopsStationed"]//li[contains(@class, "tribe")]')
-    tribe_id = tribe_id.get_attribute("tooltip-translate")
-    if "Tribe_1" in tribe_id:
-        new_queues = roman_constructor(browser, village, queues, buildings)
-        return new_queues
-    elif (
+    log("start build")
+
+    if (
         "Village" in queues[0]["queueLocation"]
         and "Construct" in queues[0]["queueType"]
     ):
-        new_queues = master_constructor(browser, queues, buildings)
-        return new_queues
+        log("construct 1")
+        found = False
+        for building in buildings:
+            if queues[0]["queueBuilding"] in building["buildingName"]:
+                building_id = building["buildingId"]
+                found = True
+                break
+        if not found:
+            log("buildingId not found, remove it from queues.")
+            new_queues = queues[1:]
+            return new_queues
+        open_city(browser)
+        browser.sleep(3)
+        buildMap = browser.find('//div[@id="village_map"]')
+        buildPlace = buildMap.find_elements(
+            By.XPATH, ".//img[contains(@class,'building')]")
+        log(format(len(buildPlace)))
+        for n in buildPlace:
+
+            if "iso" in n.get_attribute("class"):
+                browser.click(n, 1)
+                log(n.get_attribute("class"))
+                browser.sleep(3)
+                buildPage = browser.find('//div[@class="gid0"]')
+                tables = buildPage.find_elements(
+                    By.XPATH, '//table[@class="new_building"]')
+                for t in tables:
+
+                    btnBuild = t.find_elements(By.XPATH, './/a')
+                    for a in btnBuild:
+                        if "build" in a.get_attribute("class"):
+                            log("5")
+
+                            if "b={}".format(building_id) in a.get_attribute("href"):
+                                log("6")
+                                browser.click(a)
+                                new_queues = queues[1:]
+                                return new_queues
+                                break
+
+                new_queues = queues[1:]
+                return new_queues
     elif (
-        "Village" in queues[0]["queueLocation"] and "Upgrade" in queues[0]["queueType"]
-    ):
+            "Upgrade" in queues[0]["queueType"] and "Village" in queues[0]["queueLocation"]):
+        log("cond 2 ")
+
         open_city(browser)
         time.sleep(1)
         found = False
@@ -89,41 +133,59 @@ def master_builder(
             log("buildingId not found, remove it from queues.")
             new_queues = queues[1:]
             return new_queues
-        building_img = browser.find(
-            '//img[contains(@class, "{}")]/following::span'.format(building_id)
-        )
-        building_status = building_img.find_element_by_xpath(
-            './/div[contains(@class, "buildingStatus")]'
-        )
-        color = building_status.find_element_by_xpath(
-            './/div[contains(@class, "colorLayer")]'
-        ).get_attribute("class")
-        new_queues = check_color(browser, village, color, building_status, queues)
-        return new_queues
+
+        buildMap = browser.find('//div[@id="village_map"]')
+        buildPlace = buildMap.find_elements(
+            By.XPATH, ".//img[contains(@class,'building')]")
+        for item in buildPlace:
+            n = item
+            if "g{}".format(building_id) in item.get_attribute("class"):
+                if "20" not in item.get_attribute("alt"):
+                    browser.click(n)
+                    box = browser.find('//div[@id="build"]')
+
+                    btn = box.find_elements(
+                        By.XPATH, ".//a")
+                    for a in btn:
+                        if "build" in a.get_attribute("class"):
+                            
+                            new_queues = queues[1:]
+                            log("building ressource")
+                            return new_queues
+
     elif "Resources" in queues[0]["queueLocation"]:
+        log("cond 3")
+
         open_resources(browser)
         time.sleep(1)
         location_id = queues[0]["queueBuilding"]
-        building_location = browser.find(
-            '//building-location[@class="buildingLocation {}"]'.format(location_id)
-        )
-        building_status = building_location.find_element_by_xpath(
-            './/div[contains(@class, "buildingStatus")]'
-        )
-        color = building_status.find_element_by_xpath(
-            './/div[contains(@class, "colorLayer")]'
-        ).get_attribute("class")
-        new_queues = check_color(browser, village, color, building_status, queues)
-        open_city(browser)
-        return new_queues
+
+        base_url = "https://qtatar.com"
+        base_url += "/build?id="
+        base_url += location_id
+        log(base_url)
+        browser.get(base_url)
+        time.sleep(3)
+        try:
+            divId = browser.find('//div[@id ="build"]')
+            btn = divId.find_element(By.XPATH, './/a[@class="build"]')
+            browser.click(btn, 1)
+            new_queues = queues[1:]
+            log("building ressource")
+            return new_queues
+        except:
+
+            new_queues = queues[1:]
+
+            return new_queues
+
     else:
         return queues
 
 
-@use_browser
+@ use_browser
 def check_queue_times(browser: client, village: int, default_interval: int) -> tuple:
     open_village(browser, village)
-    notepad = browser.find('//a[@id="notepadButton"]')
     construct_slot, queue_slot = check_building_queue(browser, village)
     if construct_slot:
         return default_interval, False
@@ -131,7 +193,7 @@ def check_queue_times(browser: client, village: int, default_interval: int) -> t
     building_queue_container = browser.find(
         '//div[contains(@class, "buildingQueueContainer queueContainer")]'
     )
-    divs = building_queue_container.find_elements_by_xpath("./div")
+    divs = building_queue_container.find_elements(By.XPATH, "./div")
     for div in divs:
         the_class = div.get_attribute("drop-class")
         if not the_class:
@@ -140,25 +202,25 @@ def check_queue_times(browser: client, village: int, default_interval: int) -> t
             if "noDrop" in the_class:
                 browser.click(div, 1)
                 inner_box = browser.find('//div[@class="detailsInnerBox"]')
-                details_contents = inner_box.find_elements_by_xpath(
-                    './div[contains(@class, "detailsContent")]'
-                )
+                details_contents = inner_box.find_elements(By.XPATH,
+                                                           './div[contains(@class, "detailsContent")]'
+                                                           )
                 times = []
                 finish_earlier = []
                 for details_content in details_contents:
-                    details_info = details_content.find_element_by_xpath(
-                        './div[contains(@class, "detailsInfo")]'
-                    )
-                    details_time = details_info.find_element_by_xpath(
-                        './div[@class="detailsTime"]'
-                    )
-                    span = details_time.find_element_by_xpath("./span")
+                    details_info = details_content.find_element(By.XPATH,
+                                                                './div[contains(@class, "detailsInfo")]'
+                                                                )
+                    details_time = details_info.find_element(By.XPATH,
+                                                             './div[@class="detailsTime"]'
+                                                             )
+                    span = details_time.find_element(By.XPATH, "./span")
                     the_time = span.get_attribute("innerHTML")
                     times.append(the_time)
-                    details_button = details_content.find_element_by_xpath(
-                        './div[contains(@class, "detailsButtonContainer")]'
-                    )
-                    button = details_button.find_element_by_xpath("./button")
+                    details_button = details_content.find_element(By.XPATH,
+                                                                  './div[contains(@class, "detailsButtonContainer")]'
+                                                                  )
+                    button = details_button.find_element(By.XPATH, "./button")
                     the_class = button.get_attribute("class")
                     if "disabled" in the_class:
                         finish_earlier.append(False)
@@ -202,36 +264,34 @@ def check_queue_times(browser: client, village: int, default_interval: int) -> t
     return 1, True
 
 
-@use_browser
+@ use_browser
 def check_building_queue(browser: client, village: int) -> tuple:
     open_village(browser, village)
     # check how much construction slot that empty
-    empty_construct_slot = 0
-    construction_container = browser.find('//div[@class="constructionContainer"]')
-    building_queue_slots = construction_container.find_elements_by_xpath("./div")
-    for building_queue_slot in building_queue_slots:
-        the_class = building_queue_slot.get_attribute("class")
-        if "paid" in the_class:
-            continue
-        empty_construct_slot += 1
-    # check how much queue slot that empty
-    empty_queue = 0
-    builder_container = browser.find('//div[@class="masterBuilderContainer"]')
-    queue_slots = builder_container.find_elements_by_xpath("./div")
-    for queue_slot in queue_slots:
-        the_class = queue_slot.get_attribute("class")
-        if "empty" not in the_class or "locked" in the_class:
-            continue
-        empty_queue += 1
-    return empty_construct_slot, empty_queue
+    try:
+        construction_container = browser.find(
+            './/table[@id="building_contract"]')
+        log("queue finded !")
+        tbody = construction_container.find_element(
+            By.XPATH, './/tbody')
+
+        building_queue_slots = tbody.find_elements(
+            By.XPATH, "./tr")
+
+        log('building_queue_slots {}' + format(len(building_queue_slots)))
+        return 3 - len(building_queue_slots)
+
+    except NoSuchElementException:
+        return 3
 
 
-@use_browser
+@ use_browser
 def master_constructor(browser: client, queues: list, buildings: list) -> list:
     open_city(browser)
     time.sleep(1)
     base_url = browser.current_url()
-    location_slots = browser.finds('//building-location[contains(@class, "free")]')
+    location_slots = browser.finds(
+        '//building-location[contains(@class, "free")]')
 
     if len(location_slots) < 1:
         log("no free slot for construc the building.")
@@ -258,11 +318,12 @@ def master_constructor(browser: client, queues: list, buildings: list) -> list:
         return new_queues
 
     modal_content = browser.find('//div[@class="modalContent"]')
-    pages = modal_content.find_element_by_xpath('.//div[contains(@class, "pages")]')
+    pages = modal_content.find_element(
+        By.XPATH, './/div[contains(@class, "pages")]')
     pages_class = pages.get_attribute("class")
     found = False
     if "ng-hide" in pages_class:
-        building_img = modal_content.find_elements_by_xpath(".//img")
+        building_img = modal_content.find_elements(By.XPATH, ".//img")
         for img in building_img:
             the_class = img.get_attribute("class")
             if building_type in the_class:
@@ -270,9 +331,9 @@ def master_constructor(browser: client, queues: list, buildings: list) -> list:
                 found = True
                 break
     else:
-        pages = pages.find_elements_by_xpath("./div")
+        pages = pages.find_elements(By.XPATH, "./div")
         for page in pages[2:-1]:
-            building_img = modal_content.find_elements_by_xpath(".//img")
+            building_img = modal_content.find_elements(By.XPATH, ".//img")
             for img in building_img:
                 the_class = img.get_attribute("class")
                 if building_type in the_class:
@@ -288,9 +349,9 @@ def master_constructor(browser: client, queues: list, buildings: list) -> list:
         new_queues = queues[1:]
         return new_queues
 
-    buttons = modal_content.find_elements_by_xpath(
-        './/button[contains(@class, "startConstruction")]'
-    )
+    buttons = modal_content.find_elements(By.XPATH,
+                                          './/button[contains(@class, "startConstruction")]'
+                                          )
 
     for button in buttons:
         the_class = button.get_attribute("class")
@@ -315,13 +376,14 @@ def master_constructor(browser: client, queues: list, buildings: list) -> list:
     return new_queues
 
 
-@use_browser
+@ use_browser
 def check_color(
     browser: client, village: int, color: str, building_status, queues: list
 ) -> list:
-    notepad = browser.find('//a[@id="notepadButton"]')
+    new_queues = []
+    # notepad = browser.find('//a[@id="notepadButton"]')
     if "possible" in color:  # green
-        browser.click_v2(building_status, 1)
+        browser.click_v2(building_status, village)
         browser.hover(notepad, 1)
         log("upgrading..")
         new_queues = queues[1:]
@@ -351,70 +413,71 @@ def check_color(
     return new_queues
 
 
-def roman_constructor(
-    browser: client, village: int, queues: list, buildings: list
-) -> list:
-    temp_dict = {x: y for x, y in enumerate(queues)}
-    new_dict = {x: y for x, y in enumerate(queues)}
-    for index, queue in temp_dict.items():
-        if "Village" in queue["queueLocation"] and "Construct" in queue["queueType"]:
-            temp_queues = [queue]
-            new_queues = master_constructor(browser, temp_queues, buildings)
-            if not new_queues:
-                del new_dict[index]
-            construct_slot, queue_slot = check_building_queue(browser, village)
-            if not construct_slot and not queue_slot:
-                break
-        elif "Village" in queue["queueLocation"] and "Upgrade" in queue["queueType"]:
-            open_city(browser)
-            time.sleep(1)
-            for building in buildings:
-                if queue["queueBuilding"] in building["buildingName"]:
-                    building_id = building["buildingId"]
-                    break
-            building_img = browser.find(
-                '//img[contains(@class, "{}")]/following::span'.format(building_id)
-            )
-            building_status = building_img.find_element_by_xpath(
-                './/div[contains(@class, "buildingStatus")]'
-            )
-            color = building_status.find_element_by_xpath(
-                './/div[contains(@class, "colorLayer")]'
-            ).get_attribute("class")
-            temp_queues = [queue]
-            new_queues = check_color(
-                browser, village, color, building_status, temp_queues
-            )
-            if not new_queues:
-                del new_dict[index]
-            construct_slot, queue_slot = check_building_queue(browser, village)
-            if not construct_slot and not queue_slot:
-                break
-        elif "Resources" in queue["queueLocation"]:
-            open_resources(browser)
-            time.sleep(1)
-            location_id = queue["queueBuilding"]
-            building_location = browser.find(
-                '//building-location[@class="buildingLocation {}"]'.format(location_id)
-            )
-            building_status = building_location.find_element_by_xpath(
-                './/div[contains(@class, "buildingStatus")]'
-            )
-            color = building_status.find_element_by_xpath(
-                './/div[contains(@class, "colorLayer")]'
-            ).get_attribute("class")
-            temp_queues = [queue]
-            new_queues = check_color(
-                browser, village, color, building_status, temp_queues
-            )
-            if not new_queues:
-                del new_dict[index]
-            construct_slot, queue_slot = check_building_queue(browser, village)
-            if not construct_slot and not queue_slot:
-                open_city(browser)
-                break
-    new_queue = [x for x in new_dict.values()]
-    return new_queue
+# def roman_constructor(
+#     browser: client, village: int, queues: list, buildings: list
+# ) -> list:
+#     temp_dict = {x: y for x, y in enumerate(queues)}
+#     new_dict = {x: y for x, y in enumerate(queues)}
+#     for index, queue in temp_dict.items():
+#         if "Village" in queue["queueLocation"] and "Construct" in queue["queueType"]:
+#             temp_queues = [queue]
+#             new_queues = master_constructor(browser, temp_queues, buildings)
+#             if not new_queues:
+#                 del new_dict[index]
+#             construct_slot, queue_slot = check_building_queue(browser, village)
+#             if not construct_slot and not queue_slot:
+#                 break
+#         elif "Village" in queue["queueLocation"] and "Upgrade" in queue["queueType"]:
+#             open_city(browser)
+#             time.sleep(1)
+#             for building in buildings:
+#                 if queue["queueBuilding"] in building["buildingName"]:
+#                     building_id = building["buildingId"]
+#                     break
+#             building_img = browser.find(
+#                 '//img[contains(@class, "{}")]/following::span'.format(building_id)
+#             )
+#             building_status = building_img.find_element(By.XPATH,
+#                                                         './/div[contains(@class, "buildingStatus")]'
+#                                                         )
+#             color = building_status.find_element(By.XPATH,
+#                                                  './/div[contains(@class, "colorLayer")]'
+#                                                  ).get_attribute("class")
+#             temp_queues = [queue]
+#             new_queues = check_color(
+#                 browser, village, color, building_status, temp_queues
+#             )
+#             if not new_queues:
+#                 del new_dict[index]
+#             construct_slot, queue_slot = check_building_queue(browser, village)
+#             if not construct_slot and not queue_slot:
+#                 break
+#         elif "Resources" in queue["queueLocation"]:
+#             open_resources(browser)
+#             time.sleep(1)
+#             location_id = queue["queueBuilding"]
+#             building_location = browser.find(
+#                 '//building-location[@class="buildingLocation {}"]'.format(
+#                     location_id)
+#             )
+#             building_status = building_location.find_element(By.XPATH,
+#                                                              './/div[contains(@class, "buildingStatus")]'
+#                                                              )
+#             color = building_status.find_element(By.XPATH,
+#                                                  './/div[contains(@class, "colorLayer")]'
+#                                                  ).get_attribute("class")
+#             temp_queues = [queue]
+#             new_queues = check_color(
+#                 browser, village, color, building_status, temp_queues
+#             )
+#             if not new_queues:
+#                 del new_dict[index]
+#             construct_slot, queue_slot = check_building_queue(browser, village)
+#             if not construct_slot and not queue_slot:
+#                 open_city(browser)
+#                 break
+#     new_queue = [x for x in new_dict.values()]
+#     return new_queue
 
 
 def five_mins(browser: client, village: int) -> None:
@@ -426,7 +489,7 @@ def five_mins(browser: client, village: int) -> None:
     building_queue_container = browser.find(
         '//div[contains(@class, "buildingQueueContainer queueContainer")]'
     )
-    divs = building_queue_container.find_elements_by_xpath("./div")
+    divs = building_queue_container.find_elements(By.XPATH, "./div")
     for div in divs:
         the_class = div.get_attribute("drop-class")
         if not the_class:
@@ -435,22 +498,22 @@ def five_mins(browser: client, village: int) -> None:
             if "noDrop" in the_class:
                 browser.click(div, 1)
                 inner_box = browser.find('//div[@class="detailsInnerBox"]')
-                details_contents = inner_box.find_elements_by_xpath(
-                    './div[contains(@class, "detailsContent")]'
-                )
+                details_contents = inner_box.find_elements(By.XPATH,
+                                                           './div[contains(@class, "detailsContent")]'
+                                                           )
                 for details_content in details_contents:
-                    details_button = details_content.find_element_by_xpath(
-                        './div[contains(@class, "detailsButtonContainer")]'
-                    )
-                    button = details_button.find_element_by_xpath("./button")
+                    details_button = details_content.find_element(By.XPATH,
+                                                                  './div[contains(@class, "detailsButtonContainer")]'
+                                                                  )
+                    button = details_button.find_element(By.XPATH, "./button")
                     the_class = button.get_attribute("class")
                     if "disabled" in the_class or "premium" in the_class:
                         continue
                     else:
                         try:
-                            voucher = button.find_element_by_xpath(
-                                './/span[@class="price voucher"]'
-                            )
+                            voucher = button.find_element(By.XPATH,
+                                                          './/span[@class="price voucher"]'
+                                                          )
                         except:
                             browser.click(button, 1)
                         else:

@@ -1,3 +1,4 @@
+from selenium.webdriver.common.by import By
 from .custom_driver import client, use_browser
 from .slot import find_slot
 from .utils import log
@@ -16,7 +17,7 @@ from datetime import timedelta
 
 def upgrade_slot(browser: client, id: int) -> None:
     el = find_slot(browser, id)
-    el = el.find_element_by_xpath(".//div[contains(@class, 'clickable')]")
+    el = el.find_element(By.XPATH,".//div[contains(@class, 'clickable')]")
     browser.click(el, 1)
     browser.click(el, 1)
 
@@ -57,49 +58,49 @@ def upgrade_units_smithy(browser: client, village: int, units: list) -> int:
     open_building_type(browser, building.smithy)
 
     smith = browser.find("//div[contains(@class, 'blacksmith')]")
-    carousel = smith.find_element_by_xpath(".//div[@class='carousel']")
-    pages = carousel.find_element_by_xpath(".//div[contains(@class, 'pages')]")
+    carousel = smith.find_element(By.XPATH,".//div[@class='carousel']")
+    pages = carousel.find_element(By.XPATH,".//div[contains(@class, 'pages')]")
     classes = pages.get_attribute("class")
 
     # todo implement pages
     pages = "ng-hide" not in classes  # true if there are more than one page
 
-    item_container = carousel.find_element_by_xpath(".//div[@class='items']")
-    items = item_container.find_elements_by_xpath("./*")
+    item_container = carousel.find_element(By.XPATH,".//div[@class='items']")
+    items = item_container.find_elements(By.XPATH,"./*")
 
     countdown = ""
     available_units: dict = {}
 
     for item in items:
-        unit = item.find_element_by_xpath(".//div[contains(@class, 'unit')]")
+        unit = item.find_element(By.XPATH,".//div[contains(@class, 'unit')]")
         classes = unit.get_attribute("class")
 
         if "ng-hide" not in classes:
             # continue because no dummy container
 
             # get unit id
-            unit_img = unit.find_element_by_xpath(
+            unit_img = unit.find_element(By.XPATH,
                 ".//img[contains(@class, 'itemImage')]"
             )
             unit_id = int(unit_img.get_attribute("data"))
 
-            item_body = unit.find_element_by_xpath(".//div[@class='itemBody']")
+            item_body = unit.find_element(By.XPATH,".//div[@class='itemBody']")
 
             # check for progress bar
-            progress_container = item_body.find_element_by_xpath(
+            progress_container = item_body.find_element(By.XPATH,
                 ".//div[contains(@class, 'progressContainer')]"
             )
             classes = progress_container.get_attribute("class")
 
             if "ng-hide" not in classes:
                 # here is a loading bar
-                countdown_div = progress_container.find_element_by_xpath(
+                countdown_div = progress_container.find_element(By.XPATH,
                     ".//div[@class='countdown']"
                 )
                 countdown = countdown_div.get_attribute("innerHTML")
 
             # check if unit is locked
-            divs = item_body.find_elements_by_xpath("./*")
+            divs = item_body.find_elements(By.XPATH,"./*")
             locked = False
             for div in divs:
                 classes = div.get_attribute("class")

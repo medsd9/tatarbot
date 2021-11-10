@@ -1,3 +1,4 @@
+from selenium.webdriver.common.by import By
 from .custom_driver import client, use_browser
 import time
 import json
@@ -127,7 +128,7 @@ def start_training(
             )
             browser.click(image_troop, 1)
             input_troop = browser.find('//div[@class="inputContainer"]')
-            input_troop = input_troop.find_element_by_xpath("./input")
+            input_troop = input_troop.find_element(By.XPATH,"./input")
             input_troop.click()
             input_troop.send_keys(input_amount)
             browser.sleep(1.5)
