@@ -15,7 +15,7 @@ def master_builder_thread(
     browser: client, village: int, file_name: str, interval: int
 ) -> None:
     default_interval = interval
-    # browser.sleep(10)
+    browser.sleep(5)
     with open(settings.buildings_path, "r") as f:
         content = json.load(f)
     buildings = [x for x in content["buildings"]]
@@ -25,26 +25,36 @@ def master_builder_thread(
         with open(file_path, "r") as f:
             content = json.load(f)
         queues = [x for x in content["queues"]]
+
         construct_slot = check_building_queue(browser, village)
+
         if queues and (construct_slot):
             while construct_slot:
-                queues = master_builder(browser, village, queues, buildings)
-                construct_slot = check_building_queue(
-                    browser, village)
-                if not construct_slot:
+                log('construct_slot' + str(construct_slot))
+
+                if "depends" in queues[0] and construct_slot != 3:
+                    log("dependant")
+                    browser.sleep(30)
                     break
-                if not queues:
-                    break
+                else:
+                    queues = master_builder(
+                        browser, village, queues, buildings)
+                    construct_slot = check_building_queue(
+                        browser, village)
+                    if not construct_slot:
+                        endNow(browser, village)
+                        construct_slot = check_building_queue(
+                            browser, village)
+
+                    if not queues:
+                        break
             with open(file_path, "w") as f:
                 f.write('{"queues":')
-                f.write(json.dumps(queues, indent=4))
+                f.write(json.dumps(queues or [], indent=4))
                 f.write("}")
-            # interval, can_finish_earlier = check_queue_times(
-            #     browser, village, default_interval
-            # )
+
             time.sleep(interval)
-            # if can_finish_earlier:
-            #     five_mins(browser, village)
+
         else:
             log("no queue or slot !")
             construct_slot = check_building_queue(browser, village)
@@ -75,7 +85,7 @@ def master_builder(
         "Village" in queues[0]["queueLocation"]
         and "Construct" in queues[0]["queueType"]
     ):
-        log("construct 1")
+        log("cond 1 " + queues[0]["queueBuilding"])
         found = False
         for building in buildings:
             if queues[0]["queueBuilding"] in building["buildingName"]:
@@ -87,34 +97,40 @@ def master_builder(
             new_queues = queues[1:]
             return new_queues
         open_city(browser)
-        browser.sleep(3)
-        buildMap = browser.find('//div[@id="village_map"]')
-        buildPlace = buildMap.find_elements(
-            By.XPATH, ".//img[contains(@class,'building') and contains(@class,'iso')]")
-        
-        
-        browser.click(buildPlace[0], 1)
-        buildPage = browser.find('//div[@class="gid0"]')
-        tables = buildPage.find_elements(
-            By.XPATH, './/table[@class="new_building"]')
-        for t in tables:
 
-                        btnBuild = t.find_element(By.XPATH, './/a[contains(@class,"build")]')
-                        if "b={}".format(building_id) in btnBuild.get_attribute("href"):
-                                log("6")
-                                browser.click(btnBuild)
-                                new_queues = queues[1:]
-                                return new_queues
-                                break
+        time.sleep(1)
+        buildMap = browser.find('//div[@id="village_map"]')
+        if building_id == "16":
+            log("BUILDING RALLY")
+            browser.get("https://qtatar.com/build?id=39")
+            browser.sleep(2)
+        else:
+            buildMap = browser.find('//map[@id="map2"]')
+            buildPlace = buildMap.find_elements(By.XPATH,
+                                                ".//area[@title ='موقع البناء']")
+            log(buildPlace[0].get_attribute("href"))
+            browser.get(buildPlace[0].get_attribute("href"))
+        browser.sleep(2)
+        buildPage = browser.find('//div[@class="gid0"]')
+
+        btnBuild = buildPage.find_elements(
+            By.XPATH, './/a[contains(@class,"build")]')
+        for b in btnBuild:
+            if "b={}".format(building_id) in b.get_attribute("href"):
+
+                browser.click(b)
+                new_queues = queues[1:]
+                return new_queues
+                break
 
         new_queues = queues[1:]
         return new_queues
     elif (
             "Upgrade" in queues[0]["queueType"] and "Village" in queues[0]["queueLocation"]):
-        log("cond 2 ")
+        log("cond 2 " + queues[0]["queueBuilding"])
 
         open_city(browser)
-        time.sleep(1)
+        browser.sleep(1)
         found = False
         for building in buildings:
             if queues[0]["queueBuilding"] in building["buildingName"]:
@@ -126,35 +142,57 @@ def master_builder(
             new_queues = queues[1:]
             return new_queues
         browser.sleep(2)
-        buildMap = browser.find('//div[@id="village_map"]')
-        buildPlace = buildMap.find_elements(
-            By.XPATH, ".//img[contains(@class,'building')]")
-        for item in buildPlace:
-             if "g{}".format(building_id) in item.get_attribute("class"):
+        if building_id == "16":
+            log("BUILDING RALLY")
+            browser.get("https://qtatar.com/build?id=39")
+            browser.sleep(2)
+            box = browser.find('//p[@id="contract"]')
+            if box.find_elements(
+                    By.XPATH, ".//span[contains(@class,'none')]") and not box.find_elements(
+                    By.XPATH, ".//a[contains(@class,'build')]"):
+                new_queues = queues[1:]
+                return new_queues
+            btn = box.find_elements(
+                By.XPATH, ".//a[contains(@class,'build')]")
 
-                 if "20" not in item.get_attribute("alt"):
-                    browser.click(item, 3)
-                    box = browser.find('//p[@id="contract"]')
-                    if  box.find_elements(
-                        By.XPATH, ".//span[contains(@class,'none')]") :
-                         new_queues = queues[1:]
-                         return new_queues
-                         break
+            browser.click(btn[0], 1)
 
-                    btn = box.find_elements(
-                        By.XPATH, ".//a[contains(@class,'build')]")
-                     
-                    browser.click(btn[0], 1)
+            new_queues = queues[1:]
 
-                    new_queues = queues[1:]
-                    log("building ressource")
-                    return new_queues
+            return new_queues
 
-        new_queues = queues[1:]
-        log("building ressource")
-        return new_queues     
+        else:
+            buildMap = browser.find('//div[@id="village_map"]')
+            buildPlace = buildMap.find_elements(
+                By.XPATH, ".//img[contains(@class,'building')]")
+            for id , item in enumerate(buildPlace):
+                if "g{}".format(building_id) in item.get_attribute("class"):
+
+                    if "20" not in item.get_attribute("alt"):
+                        log("FOUND BAT")
+                        browser.click(item, 3)
+                        browser.sleep(2)
+                        box = browser.find('//p[@id="contract"]')
+
+                        btn = box.find_elements(
+                            By.XPATH, ".//a[contains(@class,'build')]")
+                        for b in btn:
+
+                            if "max" in b.get_attribute("href"):
+                                new_queues = queues[1:]
+                                return new_queues
+                            else:
+                                browser.click(b, 1)
+
+                                new_queues = queues[1:]
+
+                                return new_queues
+
+            new_queues = queues[1:]
+
+            return new_queues
     elif "Resources" in queues[0]["queueLocation"]:
-        log("cond 3")
+        log("cond 3 " + queues[0]["queueBuilding"])
 
         open_resources(browser)
         time.sleep(1)
@@ -230,7 +268,6 @@ def check_queue_times(browser: client, village: int, default_interval: int) -> t
             else:
                 continue
     # parse time to seconds
-    browser.hover(notepad)
     times_in_seconds = []
     for time in times:
         time_in_seconds = parse_time_to_seconds(time)
@@ -283,134 +320,6 @@ def check_building_queue(browser: client, village: int) -> tuple:
 
     except NoSuchElementException:
         return 3
-
-
-@ use_browser
-def master_constructor(browser: client, queues: list, buildings: list) -> list:
-    open_city(browser)
-    time.sleep(1)
-    base_url = browser.current_url()
-    location_slots = browser.finds(
-        '//building-location[contains(@class, "free")]')
-
-    if len(location_slots) < 1:
-        log("no free slot for construc the building.")
-        new_queues = queues[1:]
-        return new_queues
-
-    the_class = location_slots[0].get_attribute("class")
-    base_url += "/location:"
-    base_url += re.findall("\d+", the_class)[0]
-    base_url += "/window:building"
-    browser.get(base_url)
-    time.sleep(3.5)
-    found = False
-
-    for building in buildings:
-        if queues[0]["queueBuilding"] in building["buildingName"]:
-            building_type = building["buildingType"]
-            found = True
-            break
-
-    if not found:
-        log("buildingType not found, remove it from queues.")
-        new_queues = queues[1:]
-        return new_queues
-
-    modal_content = browser.find('//div[@class="modalContent"]')
-    pages = modal_content.find_element(
-        By.XPATH, './/div[contains(@class, "pages")]')
-    pages_class = pages.get_attribute("class")
-    found = False
-    if "ng-hide" in pages_class:
-        building_img = modal_content.find_elements(By.XPATH, ".//img")
-        for img in building_img:
-            the_class = img.get_attribute("class")
-            if building_type in the_class:
-                browser.click(img, 1)
-                found = True
-                break
-    else:
-        pages = pages.find_elements(By.XPATH, "./div")
-        for page in pages[2:-1]:
-            building_img = modal_content.find_elements(By.XPATH, ".//img")
-            for img in building_img:
-                the_class = img.get_attribute("class")
-                if building_type in the_class:
-                    browser.click(img, 1)
-                    found = True
-                    break
-            if found:
-                break
-            browser.click(pages[-1], 1.3)
-    if not found:
-        log("building image not found.")
-        close_modal(browser)
-        new_queues = queues[1:]
-        return new_queues
-
-    buttons = modal_content.find_elements(By.XPATH,
-                                          './/button[contains(@class, "startConstruction")]'
-                                          )
-
-    for button in buttons:
-        the_class = button.get_attribute("class")
-        if "ng-hide" not in the_class:
-            if "disable" in the_class:
-                tooltip = button.get_attribute("tooltip-translate-switch")
-                if "Requirements" in tooltip:
-                    log("requirements not fulfilled.")
-                    close_modal(browser)
-                    new_queues = queues[1:]
-                    return new_queues
-                else:
-                    log("building queue full.")
-                    close_modal(browser)
-                    return queues
-            else:
-                browser.click(button, 1.3)
-                log("constructing..")
-                new_queues = queues[1:]
-                return new_queues
-
-    return new_queues
-
-
-@ use_browser
-def check_color(
-    browser: client, village: int, color: str, building_status, queues: list
-) -> list:
-    new_queues = []
-    # notepad = browser.find('//a[@id="notepadButton"]')
-    if "possible" in color:  # green
-        browser.click_v2(building_status, village)
-        browser.hover(notepad, 1)
-        log("upgrading..")
-        new_queues = queues[1:]
-        return new_queues
-
-    if "notNow" in color:  # green / yellow
-        construct_slot, queue_slot = check_building_queue(browser, village)
-        if queue_slot:
-            browser.click_v2(building_status, 1)
-            browser.hover(notepad, 1)
-            log("queue building..")
-            new_queues = queues[1:]
-            return new_queues
-        else:
-            return queues
-
-    if "notAtAll" in color:  # grey
-        log("grey, removing from queue.")
-        new_queues = queues[1:]
-        return new_queues
-
-    if "maxLevel" in color:  # blue
-        log("blue, removing from queue.")
-        new_queues = queues[1:]
-        return new_queues
-
-    return new_queues
 
 
 # def roman_constructor(
@@ -478,6 +387,36 @@ def check_color(
 #                 break
 #     new_queue = [x for x in new_dict.values()]
 #     return new_queue
+
+
+def endNow(browser: client, village: int) -> None:
+    open_resources(browser)
+    construct_slot = check_building_queue(browser, village)
+    if construct_slot != 0:
+        return
+
+    try:
+        construction_container = browser.find(
+            './/table[@id="building_contract"]')
+        log("queue finded !")
+        tbody = construction_container.find_element(
+            By.XPATH, './/tbody')
+
+        building_queue_slots = tbody.find_elements(
+            By.XPATH, "//span[@id='timer1']")
+        sum = 0
+        for b in building_queue_slots:
+
+            sum += parse_time_to_seconds(b.get_attribute("innerHTML"))
+
+        if sum > 60*10:
+            thead = construction_container.find_element(
+                By.XPATH, './/thead')
+            btn = thead.find_element(By.XPATH, './/a')
+            browser.click(btn)
+
+    except NoSuchElementException:
+        return
 
 
 def five_mins(browser: client, village: int) -> None:

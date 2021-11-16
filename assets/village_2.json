@@ -1,71 +1,89 @@
-{"queues":[
- 
-   
-      {
-          "queueLocation" : "Resources",
-          "queueType": "Upgrade",
-    
-          "queueBuilding" : "9"
-        },
-        {
-            "queueLocation" : "Resources",
-            "queueType": "Upgrade",
-      
-            "queueBuilding" : "10"
-          },
-        {
-            "queueLocation" : "Village",
-            "queueType": "Upgrade",
-      
-            "queueBuilding" : "Main Building"
-          },
-          {
-              "queueLocation" : "Village",
-              "queueType": "Upgrade",
-        
-              "queueBuilding" : "Main Building"
-            },
-            {
-                "queueLocation" : "Village",
-                "queueType": "Upgrade",
-          
-                "queueBuilding" : "Main Building"
-              },
-              {
-                  "queueLocation" : "Village",
-                  "queueType": "Upgrade",
-            
-                  "queueBuilding" : "Main Building"
-                },
-                {
-                    "queueLocation" : "Village",
-                    "queueType": "Upgrade",
-              
-                    "queueBuilding" : "Main Building"
-                  },
-                  {
-                      "queueLocation" : "Village",
-                      "queueType": "Upgrade",
-                
-                      "queueBuilding" : "Main Building"
-                    },
-                    {
-                        "queueLocation" : "Village",
-                        "queueType": "Upgrade",
-                  
-                        "queueBuilding" : "Main Building"
-                      },
-                      {
-                        "queueLocation" : "Resources",
-                        "queueType": "Upgrade",
-                  
-                        "queueBuilding" : "11"
-                      },
-                      {
-                        "queueLocation" : "Resources",
-                        "queueType": "Upgrade",
-                  
-                        "queueBuilding" : "12"
-                      }
-
-]}
+{
+  "queues": [
+    {
+        "queueLocation": "Village",
+        "queueType": "Construct",
+        "queueBuilding": "Workshop"
+      },
+    {
+      "queueLocation": "Village",
+      "queueType": "Upgrade",
+      "queueBuilding": "Workshop"
+    },
+    {
+      "queueLocation": "Village",
+      "queueType": "Upgrade",
+      "queueBuilding": "Workshop"
+    },
+    {
+      "queueLocation": "Village",
+      "queueType": "Upgrade",
+      "queueBuilding": "Workshop"
+    },
+    {
+      "queueLocation": "Village",
+      "queueType": "Upgrade",
+      "queueBuilding": "Workshop"
+    },
+    {
+      "queueLocation": "Village",
+      "queueType": "Upgrade",
+      "queueBuilding": "Workshop"
+    },
+    {
+      "queueLocation": "Village",
+      "queueType": "Upgrade",
+      "queueBuilding": "Workshop"
+    },
+    {
+      "queueLocation": "Village",
+      "queueType": "Upgrade",
+      "queueBuilding": "akadimia"
+    },
+    {
+      "queueLocation": "Village",
+      "queueType": "Construct",
+      "queueBuilding": "Workshop"
+    },
+    {
+      "queueLocation": "Village",
+      "queueType": "Upgrade",
+      "queueBuilding": "Workshop"
+    },
+    {
+      "queueLocation": "Village",
+      "queueType": "Upgrade",
+      "queueBuilding": "Workshop"
+    },
+    {
+      "queueLocation": "Village",
+      "queueType": "Upgrade",
+      "queueBuilding": "Workshop"
+    },
+    {
+      "queueLocation": "Village",
+      "queueType": "Upgrade",
+      "queueBuilding": "Workshop"
+    },
+    {
+      "queueLocation": "Village",
+      "queueType": "Upgrade",
+      "queueBuilding": "Workshop"
+    },
+    {
+      "queueLocation": "Village",
+      "queueType": "Upgrade",
+      "queueBuilding": "Workshop"
+    },
+    {
+      "queueLocation": "Village",
+      "queueType": "Upgrade",
+      "queueBuilding": "Workshop"
+    },
+    {
+      "queueLocation": "Village",
+      "queueType": "Upgrade",
+      "queueBuilding": "Workshop"
+    }
+  ]
+}

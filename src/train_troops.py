@@ -14,10 +14,12 @@ def train_troops_thread(
     # init delay
     time.sleep(2)
 
-    with open(settings.units_path, "r") as f:
-        content = json.load(f)
+    # with open(settings.units_path, "r") as f:
+    #     content = json.load(f)
 
     while True:
+        open_village(browser , village)
+        
         # log("start training troops.")
         if not start_training(browser, village, units, content):
             log("village is too low of resources.")
