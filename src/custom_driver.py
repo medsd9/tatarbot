@@ -10,6 +10,7 @@ from threading import RLock
 from typing import Any
 from .settings import settings
 from fake_useragent import UserAgent
+import traceback
 
 
 def use_browser(org_func: Any):
@@ -41,6 +42,7 @@ def use_browser(org_func: Any):
                     org_func.__name__, str(e)
                 )
             )
+            log(traceback.format_exc())
 
             log("reloading world.")
            
@@ -139,7 +141,7 @@ class client:
         self.sleep(wait)
         return self.driver.find_element(By.XPATH, xpath)
 
-    def finds(self, xpath: str, wait: float = 0) -> webelement:
+    def finds(self, xpath: str, wait: int = 0) -> webelement:
         # todo wait x seconds until presencd of element
         wait = wait * settings.browser_speed
         self.sleep(wait)
@@ -159,7 +161,7 @@ class client:
         time.sleep(seconds)
 
     def click(self, element: webelement, wait: float = 0.5) -> None:
-        ActionChains(self.driver).move_to_element(element).click().perform()
+        ActionChains(self.driver).move_to_element(element).click(element).perform()
 
         wait = wait * settings.browser_speed
         self.sleep(wait)

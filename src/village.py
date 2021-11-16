@@ -1,3 +1,4 @@
+from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 from .utils import log
 from .util_game import close_modal
@@ -14,18 +15,22 @@ class building(Enum):
     academy = 22
     residence = 25
 
-
+@use_browser
 def open_village(browser: client, id: int) -> None:
-    index = id
 
-    # check selected village
-    ul = browser.find("//div[contains(@id, 'side_info')]")
-    ul = ul.find_element(By.XPATH, ".//tbody")
-    lis = ul.find_elements(By.XPATH, ".//tr")
-    link = lis[index].find_element(By.XPATH, ".//a")
-    browser.click(link, 1)
+    try:
+        # check selected village
+        ul = browser.find("//div[contains(@id, 'side_info')]")
 
-    # close_modal(browser)
+        ul = ul.find_element(By.XPATH, ".//tbody")
+        lis = ul.find_elements(By.XPATH, ".//tr")
+        link = lis[id].find_element(By.XPATH, ".//a")
+        browser.click(link, 1)
+    except:
+
+        pass
+
+        # close_modal(browser)
 
 
 def open_city(browser: client) -> None:
@@ -42,8 +47,7 @@ def open_resources(browser: client) -> None:
 
 def open_building(browser: client, building: int) -> None:
     # todo open by slot id
-    img = browser.find("//img[@id='buildingImage{}']".format(building))
-    browser.click(img, 1)
+    browser.get("https://qtatar.com/build?id={}".format(str(building)))
 
 
 def open_building_type(browser: client, b_type: building) -> None:

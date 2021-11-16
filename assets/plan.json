@@ -1,0 +1,601 @@
+{
+    "queues": [
+      {
+        "queueLocation": "Village",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "Tournament Square"
+      },
+      {
+        "queueLocation": "Village",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "Tournament Square"
+      },
+      {
+        "queueLocation": "Ressource",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "Tournament Square"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "5"
+      },
+  
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "6"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "16"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "18"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "10"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "11"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "7"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "4"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "1"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "3"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "5"
+      },
+      {
+        "queueLocation": "Ressource",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "Tournament Square"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "5"
+      },
+  
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "6"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "16"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "18"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "10"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "11"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "7"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "4"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "1"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "3"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "5"
+      },
+      {
+        "queueLocation": "Ressource",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "Tournament Square"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "5"
+      },
+  
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "6"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "16"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "18"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "10"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "11"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "7"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "4"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "1"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "3"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "5"
+      },
+      {
+        "queueLocation": "Ressource",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "Tournament Square"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "5"
+      },
+  
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "6"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "16"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "18"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "10"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "11"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "7"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "4"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "1"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "3"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "5"
+      },
+      {
+        "queueLocation": "Ressource",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "Tournament Square"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "5"
+      },
+  
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "6"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "16"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "18"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "10"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "11"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "7"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "4"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "1"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "3"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "5"
+      },
+      {
+        "queueLocation": "Ressource",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "Tournament Square"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "5"
+      },
+  
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "6"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "16"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "18"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "10"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "11"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "7"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "4"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "1"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "3"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "5"
+      },
+      {
+        "queueLocation": "Ressource",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "Tournament Square"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "5"
+      },
+  
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "6"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "16"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "18"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "10"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "11"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "7"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "4"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "1"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "3"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "5"
+      },
+      {
+        "queueLocation": "Ressource",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "Tournament Square"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "5"
+      },
+  
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "6"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "16"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "18"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "10"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "11"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "7"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "4"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "1"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "3"
+      },
+      {
+        "queueLocation": "Resources",
+        "queueType": "Upgrade",
+  
+        "queueBuilding": "5"
+      }
+    ]
+  }
+  
