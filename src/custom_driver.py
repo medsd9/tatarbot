@@ -12,6 +12,9 @@ from .settings import settings
 from fake_useragent import UserAgent
 import traceback
 
+GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google_chrome'
+CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
+
 
 def use_browser(org_func: Any):
     def wrapper(*args, **kwargs):
@@ -45,7 +48,7 @@ def use_browser(org_func: Any):
             log(traceback.format_exc())
 
             log("reloading world.")
-           
+
         finally:
             browser.done()
 
@@ -73,8 +76,9 @@ class client:
 
         options.add_argument("window-size=1500,1200")
         options.add_argument("log-level=3")
-
-        self.driver = webdriver.Chrome(path, chrome_options=options)
+        options.binary_location = GOOGLE_CHROME_PATH
+        self.driver = webdriver.Chrome(
+            execution_path=CHROMEDRIVER_PATH, chrome_options=options)
         self.set_config()
         self.save_session()
 
@@ -161,7 +165,8 @@ class client:
         time.sleep(seconds)
 
     def click(self, element: webelement, wait: float = 0.5) -> None:
-        ActionChains(self.driver).move_to_element(element).click(element).perform()
+        ActionChains(self.driver).move_to_element(
+            element).click(element).perform()
 
         wait = wait * settings.browser_speed
         self.sleep(wait)
