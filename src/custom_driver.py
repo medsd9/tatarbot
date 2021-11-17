@@ -73,13 +73,9 @@ class client:
             self.proxy = True
             options.add_argument("proxy-server={}".format(proxy))
 
-        options.binary_location = GOOGLE_CHROME_BIN
-
-
-        options.add_argument("--no-sandbox")
-        options.add_argument("--headless")
-        options.add_argument("--disable-dev-shm-usage")
-        options.add_argument("--no-sandbox")
+        options.add_argument("window-size=1500,1200")
+        options.add_argument("log-level=3")
+        options.binary_location = GOOGLE_CHROME_PATH
         self.driver = webdriver.Chrome(
             execution_path=CHROMEDRIVER_PATH, chrome_options=options)
         self.set_config()
