@@ -7,7 +7,7 @@ email = "turbo"  # optional
 password = "turbo"  # optional
 proxy = ""  # optional
 # increase the number if your internet connecion is slow
-settings.browser_speed = 0.5
+settings.browser_speed = 1
 
 
 kingbot = king_bot(
@@ -21,9 +21,11 @@ kingbot = king_bot(
 
 # place your actions below
 # kingbot.start_adventures(1000)
-# kingbot.upgrade_units_smithy(village=0, units=[2, 5])
-
-kingbot.start_building(village= 1, file_name="village_2.json" , interval=30)
+kingbot.start_custom_farmlist()
+kingbot.dodge_attack(village=0, interval=60, units=[1, 2 , 3 ,4 ,5 ,6 ,7 ,8 ,9], target=[
+                     92, 38], save_resources=False, units_train=[])
+kingbot.start_building(village=0, file_name="village_2.json", interval=120)
+kingbot.start_building(village=1, file_name="village_3.json", interval=80)
 
 # kingbot.dodge_attack(
 #     village=0,

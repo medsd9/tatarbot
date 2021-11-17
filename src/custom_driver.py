@@ -1,3 +1,4 @@
+import os
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote import webelement
@@ -10,7 +11,9 @@ from threading import RLock
 from typing import Any
 from .settings import settings
 from fake_useragent import UserAgent
-
+import traceback
+CHROMEDRIVER_PATH = "/app/.chromedriver/bin/chromedriver"
+GOOGLE_CHROME_BIN = "/app/.apt/usr/bin/google-chrome"
 
 def use_browser(org_func: Any):
     def wrapper(*args, **kwargs):
@@ -41,9 +44,10 @@ def use_browser(org_func: Any):
                     org_func.__name__, str(e)
                 )
             )
+            log(traceback.format_exc())
 
             log("reloading world.")
-           
+
         finally:
             browser.done()
 
@@ -69,10 +73,15 @@ class client:
             self.proxy = True
             options.add_argument("proxy-server={}".format(proxy))
 
-        options.add_argument("window-size=1500,1200")
-        options.add_argument("log-level=3")
+        options.binary_location = GOOGLE_CHROME_BIN
 
-        self.driver = webdriver.Chrome(path, chrome_options=options)
+
+        options.add_argument("--no-sandbox")
+        options.add_argument("--headless")
+        options.add_argument("--disable-dev-shm-usage")
+        options.add_argument("--no-sandbox")
+        self.driver = webdriver.Chrome(
+            execution_path=CHROMEDRIVER_PATH, chrome_options=options)
         self.set_config()
         self.save_session()
 
@@ -95,8 +104,8 @@ class client:
         self.set_config()
 
     def headless(self, path: str, proxy: str = "") -> None:
-        ua = UserAgent()
-        userAgent = ua.random
+        # ua = UserAgent()
+        # userAgent = ua.random
         options = webdriver.ChromeOptions()
         options.add_argument("headless")
         options.add_argument("window-size=1500,1200")
@@ -104,13 +113,15 @@ class client:
         options.add_argument("disable-dev-shm-usage")
         options.add_argument("disable-gpu")
         options.add_argument("log-level=3")
-        options.add_argument(f"user-agent={userAgent}")
+        # options.add_argument(f"user-agent={userAgent}")
+        options.binary_location = GOOGLE_CHROME_BIN
 
         if proxy != "":
             self.proxy = True
             options.add_argument("proxy-server={}".format(proxy))
 
-        self.driver = webdriver.Chrome(path, chrome_options=options)
+        self.driver = webdriver.Chrome(
+            execution_path=CHROMEDRIVER_PATH, chrome_options=options)
         self.set_config()
         self._headless = True
 
@@ -139,7 +150,7 @@ class client:
         self.sleep(wait)
         return self.driver.find_element(By.XPATH, xpath)
 
-    def finds(self, xpath: str, wait: float = 0) -> webelement:
+    def finds(self, xpath: str, wait: int = 0) -> webelement:
         # todo wait x seconds until presencd of element
         wait = wait * settings.browser_speed
         self.sleep(wait)
@@ -159,7 +170,8 @@ class client:
         time.sleep(seconds)
 
     def click(self, element: webelement, wait: float = 0.5) -> None:
-        ActionChains(self.driver).move_to_element(element).click().perform()
+        ActionChains(self.driver).move_to_element(
+            element).click(element).perform()
 
         wait = wait * settings.browser_speed
         self.sleep(wait)

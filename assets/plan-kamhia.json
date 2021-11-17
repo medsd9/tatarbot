@@ -1,0 +1,979 @@
+{
+  "queues": [
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "1"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "2"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "3"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "4"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "5"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "6"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "7"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "8"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "9"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "10"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "11"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "12"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "13"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "14"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "15"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "16"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "17"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "18"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "1"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "2"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "3"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "4"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "5"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "6"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "7"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "8"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "9"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "10"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "11"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "12"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "13"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "14"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "15"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "16"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "17"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "18"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "1"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "2"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "3"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "4"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "5"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "6"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "7"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "8"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "9"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "10"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "11"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "12"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "13"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "14"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "15"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "16"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "17"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "18"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "1"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "2"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "3"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "4"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "5"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "6"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "7"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "8"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "9"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "10"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "11"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "12"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "13"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "14"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "15"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "16"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "17"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "18"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "1"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "2"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "3"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "4"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "5"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "6"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "7"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "8"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "9"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "10"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "11"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "12"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "13"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "14"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "15"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "16"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "17"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "18"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "1"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "2"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "3"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "4"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "5"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "6"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "7"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "8"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "9"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "10"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "11"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "12"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "13"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "14"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "15"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "16"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "17"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "18"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "1"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "2"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "3"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "4"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "5"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "6"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "7"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "8"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "9"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "10"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "11"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "12"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "13"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "14"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "15"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "16"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "17"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "18"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "1"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "2"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "3"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "4"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "5"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "6"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "7"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "8"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "9"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "10"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "11"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "12"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "13"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "14"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "15"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "16"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "17"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "18"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "1"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "2"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "3"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "4"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "5"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "6"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "7"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "8"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "9"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "10"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "11"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "12"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "13"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "14"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "15"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "16"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "17"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "18"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "1"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "2"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "3"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "4"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "5"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "6"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "7"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "8"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "9"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "10"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "11"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "12"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "13"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "14"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "15"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "16"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "17"
+    },
+    {
+      "queueLocation": "Resources",
+      "queueType": "Upgrade",
+      "queueBuilding": "18"
+    },
+    {
+      "queueLocation": "Village",
+      "queueType": "Upgrade",
+      "queueBuilding": "Main Building"
+    },
+    {
+      "queueLocation": "Village",
+      "queueType": "Upgrade",
+      "queueBuilding": "Main Building"
+    },
+    {
+      "queueLocation": "Village",
+      "queueType": "Upgrade",
+      "queueBuilding": "Main Building"
+    },
+    {
+      "queueLocation": "Village",
+      "queueType": "Upgrade",
+      "queueBuilding": "Main Building"
+    },
+    {
+      "queueLocation": "Village",
+      "queueType": "Upgrade",
+      "queueBuilding": "Main Building"
+    },
+    {
+      "queueLocation": "Village",
+      "queueType": "Upgrade",
+      "queueBuilding": "Main Building"
+    },
+    {
+      "queueLocation": "Village",
+      "queueType": "Upgrade",
+      "queueBuilding": "Main Building"
+    },
+    {
+      "queueLocation": "Village",
+      "queueType": "Upgrade",
+      "queueBuilding": "Main Building"
+    },
+    {
+      "queueLocation": "Village",
+      "queueType": "Upgrade",
+      "queueBuilding": "Main Building"
+    },
+    {
+      "queueLocation": "Village",
+      "queueType": "Upgrade",
+      "queueBuilding": "Granary"
+    },
+    {
+      "queueLocation": "Village",
+      "queueType": "Upgrade",
+      "queueBuilding": "Granary"
+    },
+    {
+      "queueLocation": "Village",
+      "queueType": "Upgrade",
+      "queueBuilding": "Granary"
+    },
+    {
+      "queueLocation": "Village",
+      "queueType": "Upgrade",
+      "queueBuilding": "Granary"
+    },
+    {
+      "queueLocation": "Village",
+      "queueType": "Upgrade",
+      "queueBuilding": "Granary"
+    },
+    {
+      "queueLocation": "Village",
+      "queueType": "Upgrade",
+      "queueBuilding": "Granary"
+    }
+  ]
+}

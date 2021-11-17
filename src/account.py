@@ -6,7 +6,7 @@ from .custom_driver import client, use_browser
 def login(browser: client, gameworld: str, email: str, password: str) -> None:
     world = gameworld
 
-    browser.get("https://qtatar.com/join?s=1")
+    browser.get("https://qtatar.com/join?s=5")
 
      
     

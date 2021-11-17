@@ -18,7 +18,7 @@
       "buildingType" : "buildingType7"
     },
     {
-      "buildingName" : "Grain Mill",
+      "buildingName" : "mata7en",
       "buildingId" : "8",
       "buildingType" : "buildingType8"
     },
@@ -68,7 +68,7 @@
       "buildingType" : "buildingType18"
     },
     {
-      "buildingName" : "Barrack",
+      "buildingName" : "thakna",
       "buildingId" : "19",
       "buildingType" : "buildingType19"
     },
@@ -82,11 +82,7 @@
       "buildingId" : "21",
       "buildingType" : "buildingType21"
     },
-    {
-      "buildingName" : "Academy",
-      "buildingId" : "22",
-      "buildingType" : "buildingType22"
-    },
+    
     {
       "buildingName" : "Cranny",
       "buildingId" : "23",
@@ -123,9 +119,9 @@
       "buildingType" : "buildingType29"
     },
     {
-      "buildingName" : "Great Stable",
-      "buildingId" : "30",
-      "buildingType" : "buildingType30"
+      "buildingName" : "akadimia",
+      "buildingId" : "22",
+      "buildingType" : "buildingType22"
     },
     {
       "buildingName" : "City Wall",
@@ -191,6 +187,16 @@
       "buildingName" : "Hidden Treasury",
       "buildingId" : "45",
       "buildingType" : "buildingType45"
+    },
+    {
+      "buildingName" : "kasr abtal",
+      "buildingId" : "37",
+      "buildingType" : "buildingType37"
+    },
+    {
+      "buildingName" : "forn",
+      "buildingId" : "30",
+      "buildingType" : "buildingType30"
     }
   ]
 
