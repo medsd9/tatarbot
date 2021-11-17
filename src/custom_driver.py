@@ -10,7 +10,6 @@ from .utils import log, error
 from threading import RLock
 from typing import Any
 from .settings import settings
-from fake_useragent import UserAgent
 import traceback
 CHROMEDRIVER_PATH = "/app/.chromedriver/bin/chromedriver"
 GOOGLE_CHROME_BIN = "/app/.apt/usr/bin/google-chrome"
