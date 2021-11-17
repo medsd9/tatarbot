@@ -12,7 +12,7 @@ from typing import Any
 from .settings import settings
 import traceback
 CHROMEDRIVER_PATH = "/app/.chromedriver/bin/chromedriver"
-GOOGLE_CHROME_BIN = "/app/.apt/usr/bin/google-chrome"
+GOOGLE_CHROME_BIN = "/app/.apt/usr/bin/google_chrome"
 
 def use_browser(org_func: Any):
     def wrapper(*args, **kwargs):
