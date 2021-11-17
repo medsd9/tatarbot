@@ -74,7 +74,7 @@ class client:
 
         options.add_argument("window-size=1500,1200")
         options.add_argument("log-level=3")
-        options.binary_location = GOOGLE_CHROME_PATH
+        options.binary_location = GOOGLE_CHROME_BIN
         self.driver = webdriver.Chrome(
             execution_path=CHROMEDRIVER_PATH, chrome_options=options)
         self.set_config()
