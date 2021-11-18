@@ -116,7 +116,7 @@ class client:
 
         options.binary_location = os.environ.get( "GOOGLE_CHROME_BIN")
         self.driver = webdriver.Chrome(
-            execution_path= os.environ.get('CHROMEDRIVER_PATH'), chrome_options=options)
+            execution_path= str(os.environ.get('CHROMEDRIVER_PATH')), chrome_options=options)
         self.set_config()
         self._headless = True
 
