@@ -3,3 +3,4 @@ schedule
 typing
 fake-useragent
 chromedriver-py
+urllib3

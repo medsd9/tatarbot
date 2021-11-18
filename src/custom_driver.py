@@ -11,8 +11,7 @@ from threading import RLock
 from typing import Any
 from .settings import settings
 import traceback
-CHROMEDRIVER_PATH = "/app/.chromedriver/bin/chromedriver"
-GOOGLE_CHROME_BIN = "/app/.apt/usr/bin/google_chrome"
+ 
 
 def use_browser(org_func: Any):
     def wrapper(*args, **kwargs):
@@ -74,9 +73,9 @@ class client:
 
         options.add_argument("window-size=1500,1200")
         options.add_argument("log-level=3")
-        options.binary_location = GOOGLE_CHROME_BIN
+        options.binary_location = os.environ.get( "GOOGLE_CHROME_BIN")
         self.driver = webdriver.Chrome(
-            execution_path=CHROMEDRIVER_PATH, chrome_options=options)
+            execution_path= os.environ.get('CHROMEDRIVER_PATH'), chrome_options=options)
         self.set_config()
         self.save_session()
 
@@ -109,14 +108,15 @@ class client:
         options.add_argument("disable-gpu")
         options.add_argument("log-level=3")
         # options.add_argument(f"user-agent={userAgent}")
-        options.binary_location = GOOGLE_CHROME_BIN
+       
 
         if proxy != "":
             self.proxy = True
             options.add_argument("proxy-server={}".format(proxy))
 
+        options.binary_location = os.environ.get( "GOOGLE_CHROME_BIN")
         self.driver = webdriver.Chrome(
-            execution_path=CHROMEDRIVER_PATH, chrome_options=options)
+            execution_path= os.environ.get('CHROMEDRIVER_PATH'), chrome_options=options)
         self.set_config()
         self._headless = True
 
